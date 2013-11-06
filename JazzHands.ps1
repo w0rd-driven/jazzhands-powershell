@@ -48,5 +48,8 @@ if(!(Test-Path -Path $buildDirectory)){
    New-Item -ItemType directory -Path $buildDirectory
 }
 
-# Pipt our array, show expected values in specified order, export to CSV without the annoying type information header and in UTF8 for portability
-$outputArray | Select-Object Number, Print | Export-CSV -Path $buildDirectory\output.csv -Encoding UTF8 -NoTypeInformation
+# Pipe our array, show expected values in specified order, export to CSV without the annoying type information header and in UTF8 for portability
+#$outputArray | Select-Object Number, Print | Export-CSV -Path $buildDirectory\output.csv -Encoding UTF8 -NoTypeInformation
+
+# Let's try this without quotes to see if Github's CSV renderer works better
+$outputArray | Select-Object Number, Print | ConvertTo-CSV -NoTypeInformation | % { $_ -replace '"', ""} | Out-File -FilePath $buildDirectory\output.csv -Encoding UTF8
