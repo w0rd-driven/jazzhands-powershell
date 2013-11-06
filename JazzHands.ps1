@@ -16,9 +16,9 @@ $outputArray = @()
 
 # Range it out then iterate
 $range = 1..100 | ForEach-Object {
-    $jazz = $_ % 3; # Multiples of 3
-    $hands = $_ % 5; # Multiples of 5
-    $jazzHands = $_ % 15; # Both multiples of 3 and 5
+    $jazz = $_ % 3 # Multiples of 3
+    $hands = $_ % 5 # Multiples of 5
+    $jazzHands = $_ % 15 # Both multiples of 3 and 5
     
     # Create our custom object to handle all numbers for checking our work
     $objectOutput = New-Object PSObject -Property @{
@@ -42,7 +42,7 @@ $outputArray | Select-Object Number, Print | Write-Host # Because hash order isn
 # This part isn't really required but I'm anal about automation
 $scriptDirectory = $MyInvocation.MyCommand.Path | Split-Path
 $outputDirectory = $scriptDirectory | Split-Path | Split-Path # Eww
-$buildDirectory = $outputDirectory + "\build\powershell";
+$buildDirectory = $outputDirectory + "\build\powershell"
 
 if(!(Test-Path -Path $buildDirectory)){
    New-Item -ItemType directory -Path $buildDirectory
